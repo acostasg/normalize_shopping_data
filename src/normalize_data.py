@@ -2,6 +2,11 @@ import csv
 import re
 from datetime import datetime
 
+#Normalize shopping data to input csv
+#Association Analysis with Python
+#http://aimotion.blogspot.com.es/2013/01/machine-learning-and-data-mining.html
+#https://github.com/acostasg/normalize_shopping_data
+
 data_set = []
 count_shopping = 0
 
@@ -35,6 +40,8 @@ with open('../input/dataset.csv', newline='') as f:
 
             for value in row:
                 add_value_to_array()
+
+# Any results you write to the current directory are saved as output.
 
 with open("../output/dataset_group.csv", "w+") as f:
     writer = csv.writer(f)
