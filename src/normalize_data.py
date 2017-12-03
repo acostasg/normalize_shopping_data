@@ -1,9 +1,39 @@
 import csv
+import re
+from datetime import datetime
 
-dataset = []
+data_set = []
+
+
+def get_date_from_row():
+    global data_raw, match
+    data_raw = row.pop(0)
+    match = re.search(r'\d{1,2}/\d{1}/\d{4}', data_raw)
+
+
+def get_first_value():
+    global date
+    date = datetime.strptime(match.group(), '%d/%m/%Y').date()
+    fist_value = data_raw.replace(match.group(), '')
+    data_set.append([date, fist_value])
+
+
+def add_value_to_array():
+    if value.strip():
+        data_set.append([date, value.strip()])
+
+
 with open('../input/dataset.csv', newline='') as f:
     reader = csv.reader(f)
     for row in reader:
-        print(row[0])
-        for value in row
-            dataset.append(row)
+        get_date_from_row()
+
+        if match:
+            get_first_value()
+
+            for value in row:
+                add_value_to_array()
+
+with open("../output/dataset_group.csv", "w+") as f:
+    writer = csv.writer(f)
+    writer.writerows(data_set)
