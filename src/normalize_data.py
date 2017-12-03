@@ -3,6 +3,7 @@ import re
 from datetime import datetime
 
 data_set = []
+count_shopping = 0
 
 
 def get_date_from_row():
@@ -15,12 +16,12 @@ def get_first_value():
     global date
     date = datetime.strptime(match.group(), '%d/%m/%Y').date()
     fist_value = data_raw.replace(match.group(), '')
-    data_set.append([date, fist_value])
+    data_set.append([date, count_shopping, fist_value])
 
 
 def add_value_to_array():
     if value.strip():
-        data_set.append([date, value.strip()])
+        data_set.append([date, count_shopping, value.strip()])
 
 
 with open('../input/dataset.csv', newline='') as f:
@@ -29,6 +30,7 @@ with open('../input/dataset.csv', newline='') as f:
         get_date_from_row()
 
         if match:
+            count_shopping = count_shopping + 1
             get_first_value()
 
             for value in row:
